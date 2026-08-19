@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:payroll;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 50
+        order_inserts: true
+        order_updates: true
+
+payroll:
+  providers:
+    papaya:
+      base-url: ${PAPAYA_PAYROLL_BASE_URL:http://localhost:9090}
+      api-token: ${PAPAYA_PAYROLL_API_TOKEN:local-development-token}
+      connect-timeout: 3s
+      read-timeout: 20s
+      max-attempts: 3
+      initial-backoff: 1s
+      max-backoff: 4s
+      jitter: true
+
